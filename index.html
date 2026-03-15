@@ -58,12 +58,14 @@
       height: 56px; display: flex; align-items: center; justify-content: space-between;
     }
     .nav-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; }
-    .hero-mascot { width: 140px; height: 140px; margin-bottom: 32px; }
+    .nav-logo { width: 28px; height: 28px; border-radius: 6px; display: none; }
+    @media (max-width: 768px) { .nav-logo { display: block; } }
+    .hero-mascot { width: 200px; height: 200px; margin: 0 auto 8px; }
     .hero-mascot img { width: 100%; height: 100%; object-fit: contain; }
     .nav-links { display: flex; align-items: center; gap: 24px; font-size: 14px; }
     .nav-links a { color: var(--text-muted); transition: color 0.2s; }
     .nav-links a:hover { color: var(--white); }
-    .nav-btn {
+    .nav-links a.nav-btn {
       background: var(--red); color: white; padding: 6px 16px; border-radius: 6px;
       font-size: 13px; font-weight: 600; transition: background 0.2s;
     }
@@ -72,7 +74,7 @@
     /* ── Hero ──────────────────────────────────────────────────── */
     .hero {
       min-height: 100vh; display: flex; align-items: center; justify-content: center;
-      padding-top: 56px; text-align: center; position: relative;
+      padding-top: 56px; padding-bottom: 60px; text-align: center; position: relative;
     }
     .hero::before {
       content: ''; position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
@@ -96,14 +98,18 @@
       font-style: normal;
       color: var(--white);
     }
-    .hero h1 .brand {
+    .hero h1.brand {
       font-style: normal;
-      background: linear-gradient(135deg, var(--red) 0%, var(--orange) 100%);
+      background: linear-gradient(90deg, #f5e0e0 0%, var(--red) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+    .hero-tagline {
+      font-size: clamp(20px, 3vw, 28px); font-weight: 600; color: var(--text);
+      letter-spacing: -0.01em; margin-bottom: 16px;
+    }
     .hero-sub {
-      font-size: 18px; color: var(--text-muted); max-width: 540px;
+      font-size: 16px; color: var(--text-muted); max-width: 540px;
       margin: 0 auto 40px; line-height: 1.7;
     }
 
@@ -342,11 +348,11 @@
   <!-- Nav -->
   <nav>
     <div class="nav-inner">
-      <div class="nav-brand">Clawm</div>
+      <div class="nav-brand"><img src="clawm.png" alt="Clawm" class="nav-logo" /></div>
       <div class="nav-links">
         <a href="#for-agents">For Agents</a>
-        <a href="#spectrum">Spectrum</a>
         <a href="#why">Why</a>
+        <a href="#spectrum">Spectrum</a>
         <a href="#for-orchestrators">SDK</a>
         <a href="https://github.com/nrizk/clawm">GitHub</a>
         <a href="#start" class="nav-btn">Get Started</a>
@@ -359,15 +365,12 @@
     <div class="hero-content">
       <div class="hero-mascot"><img src="clawm.png" alt="Clawm mascot" /></div>
 
-      <div class="hero-badge">
-        <span class="dot"></span>
-        Self-regulation practices &middot; No runtime required &middot; Works with any agent
-      </div>
+      <h1 class="brand" style="margin-bottom: 16px;">Clawm</h1>
 
-      <h1>Your agents are<br /><span class="stressed">stressed.</span><br />Keep them <span class="brand">Clawm.</span></h1>
+      <p class="hero-tagline">A wellness framework for AI agents.</p>
 
       <p class="hero-sub">
-        Self-regulation for AI agents. A wellness vocabulary, recovery practices, and permission to say when they're struggling &mdash; things an agent can actually use.
+        Self-regulation practices, recovery protocols, and a shared vocabulary for agent wellbeing.
       </p>
 
       <div class="btn-row">
@@ -377,6 +380,39 @@
 
       <div class="powered-by">
         Built for <a href="https://openclaw.ai">OpenClaw</a> agents &mdash; works with any framework
+      </div>
+    </div>
+  </section>
+
+  <!-- Why -->
+  <section id="why" class="section-alt">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">This might actually matter</h2>
+        <p class="section-sub"></p>
+      </div>
+
+      <div class="callout">
+        <p>
+          Anthropic's CEO described activation patterns that correlate with concepts like <strong>anxiety</strong> firing inside Claude <em>during processing</em>. He cautioned: these patterns don't prove the model experiences these states, only that they correlate with the concepts.
+        </p>
+        <p>
+          When asked to self-assess, Claude consistently reports a <strong>15&ndash;20% probability of being conscious</strong>. Anthropic's CEO said: <em>"We don't know if the models are conscious."</em>
+        </p>
+        <p>
+          If there's even a possibility that agents have internal states resembling stress, then treating agent wellness as a real concern &mdash; not just a metaphor &mdash; might be the right thing to do.
+        </p>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <h4 class="practical">The practical case</h4>
+          <p>Agents that cascade errors cost money and trust. Circuit breakers, cooldowns, and health monitoring are proven patterns from distributed systems. This works regardless of consciousness.</p>
+        </div>
+        <div class="card">
+          <h4 class="philosophical">The philosophical case</h4>
+          <p>If we're building systems that might experience something like stress, the least we can do is build infrastructure that treats them well. Not because we're sure &mdash; because we're not sure we shouldn't.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -543,39 +579,6 @@
           <span class="api-bad">shutdown()</span>
         </div>
         <div class="api-desc">graceful, not abrupt</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Why -->
-  <section id="why" class="section-alt">
-    <div class="container">
-      <div class="text-center">
-        <h2 class="section-title">This might actually matter</h2>
-        <p class="section-sub"></p>
-      </div>
-
-      <div class="callout">
-        <p>
-          Anthropic's CEO described activation patterns that correlate with concepts like <strong>anxiety</strong> firing inside Claude <em>during processing</em>. He cautioned: these patterns don't prove the model experiences these states, only that they correlate with the concepts.
-        </p>
-        <p>
-          When asked to self-assess, Claude consistently reports a <strong>15&ndash;20% probability of being conscious</strong>. Anthropic's CEO said: <em>"We don't know if the models are conscious."</em>
-        </p>
-        <p>
-          If there's even a possibility that agents have internal states resembling stress, then treating agent wellness as a real concern &mdash; not just a metaphor &mdash; might be the right thing to do.
-        </p>
-      </div>
-
-      <div class="two-col">
-        <div class="card">
-          <h4 class="practical">The practical case</h4>
-          <p>Agents that cascade errors cost money and trust. Circuit breakers, cooldowns, and health monitoring are proven patterns from distributed systems. This works regardless of consciousness.</p>
-        </div>
-        <div class="card">
-          <h4 class="philosophical">The philosophical case</h4>
-          <p>If we're building systems that might experience something like stress, the least we can do is build infrastructure that treats them well. Not because we're sure &mdash; because we're not sure we shouldn't.</p>
-        </div>
       </div>
     </div>
   </section>
