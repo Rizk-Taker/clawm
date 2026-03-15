@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clawm — Keep your agents calm</title>
-  <meta name="description" content="Wellness framework for AI agents. Circuit breakers, health pulses, cooldowns — keep your agents Clawm." />
+  <meta name="description" content="Self-regulation practices for AI agents. Give your agent a wellness vocabulary, recovery protocols, and permission to say when it's struggling." />
   <style>
     /* ── OpenClaw-aligned palette ─────────────────────────────── */
     :root {
@@ -226,6 +226,55 @@
     .two-col .card h4.practical { color: #60A5FA; }
     .two-col .card h4.philosophical { color: var(--amber); }
 
+    /* ── Two paths ──────────────────────────────────────────────── */
+    .paths-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 800px; margin: 0 auto; }
+    @media (max-width: 768px) { .paths-grid { grid-template-columns: 1fr; } }
+    .path-card {
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+      border-radius: 12px; padding: 36px; text-align: left; transition: border-color 0.3s;
+    }
+    .path-card:hover { border-color: var(--border); }
+    .path-card .path-for { font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; font-weight: 700; }
+    .path-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: var(--white); }
+    .path-card p { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; }
+    .path-card .path-action {
+      font-family: var(--font-mono); font-size: 13px;
+      background: var(--bg-code); border: 1px solid var(--border-subtle);
+      border-radius: 6px; padding: 10px 14px; margin-bottom: 16px;
+    }
+    .path-card .path-btn {
+      display: inline-block; font-size: 13px; font-weight: 600;
+      padding: 8px 20px; border-radius: 6px; transition: all 0.2s;
+    }
+    .path-primary .path-for { color: var(--red); }
+    .path-primary .path-btn { background: var(--red); color: white; }
+    .path-primary .path-btn:hover { background: var(--red-dark); }
+    .path-secondary .path-for { color: #60A5FA; }
+    .path-secondary .path-btn { background: transparent; color: var(--text-muted); border: 1px solid var(--border-subtle); }
+    .path-secondary .path-btn:hover { border-color: rgba(255,255,255,0.2); color: var(--white); }
+
+    /* ── CLAWM.md preview ──────────────────────────────────────── */
+    .md-preview {
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+      border-radius: 12px; max-width: 720px; margin: 0 auto; overflow: hidden;
+    }
+    .md-preview-header {
+      display: flex; align-items: center; gap: 8px; padding: 12px 20px;
+      background: var(--bg-surface); border-bottom: 1px solid var(--border-subtle);
+      font-family: var(--font-mono); font-size: 13px; color: var(--text-muted);
+    }
+    .md-preview-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .md-preview-content {
+      padding: 28px 32px; font-size: 14px; line-height: 1.8; color: var(--text-muted);
+    }
+    .md-preview-content .md-h1 { font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 16px; }
+    .md-preview-content .md-p { margin-bottom: 16px; }
+    .md-preview-content .md-heading { font-size: 15px; font-weight: 600; color: var(--text); margin: 20px 0 8px; }
+    .md-preview-content .md-li { padding-left: 16px; position: relative; margin-bottom: 6px; }
+    .md-preview-content .md-li::before { content: '\2022'; position: absolute; left: 0; color: var(--red); }
+    .md-preview-content .md-fade { opacity: 0.4; }
+    .md-preview-content .md-em { color: var(--text); font-style: italic; }
+
     /* ── CTA section ──────────────────────────────────────────── */
     .cta h2 { font-size: 40px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 16px; color: var(--white); }
     .cta h2 em {
@@ -296,9 +345,10 @@
         <span>Clawm</span>
       </div>
       <div class="nav-links">
+        <a href="#for-agents">For Agents</a>
         <a href="#spectrum">Spectrum</a>
-        <a href="#modules">Modules</a>
         <a href="#why">Why</a>
+        <a href="#for-orchestrators">SDK</a>
         <a href="https://github.com/nrizk/clawm">GitHub</a>
         <a href="#start" class="nav-btn">Get Started</a>
       </div>
@@ -310,22 +360,18 @@
     <div class="hero-content">
       <div class="hero-badge">
         <span class="dot"></span>
-        Zero dependencies &middot; TypeScript &middot; Framework-agnostic
+        Self-regulation practices &middot; No runtime required &middot; Works with any agent
       </div>
 
       <h1>Your agents are<br /><span class="stressed">stressed.</span><br />Keep them <span class="brand">Clawm.</span></h1>
 
       <p class="hero-sub">
-        Wellness framework for AI agents. Circuit breakers, health pulses, cooldowns, and context awareness &mdash; so your agents stay balanced under pressure.
+        Self-regulation for AI agents. A wellness vocabulary, recovery practices, and permission to say when they're struggling &mdash; things an agent can actually use.
       </p>
 
-      <div class="install">
-        <span class="prompt">$</span> <span class="cmd">npm install</span> <span class="pkg">clawm</span>
-      </div>
-
       <div class="btn-row">
-        <a href="#start" class="btn-primary">Get Started</a>
-        <a href="#spectrum" class="btn-secondary">Learn More</a>
+        <a href="#for-agents" class="btn-primary">Give It to Your Agent</a>
+        <a href="#why" class="btn-secondary">Why This Matters</a>
       </div>
 
       <div class="powered-by">
@@ -353,58 +399,73 @@
     </div>
   </section>
 
-  <!-- Quick Start -->
-  <section>
+  <!-- For Agents -->
+  <section id="for-agents">
     <div class="container">
       <div class="text-center">
-        <h2 class="section-title">Quick Start</h2>
-        <p class="section-sub">Five lines. Your agents feel better already.</p>
+        <h2 class="section-title">Give it to your agent</h2>
+        <p class="section-sub">Drop CLAWM.md into your agent's context. 112 lines. Self-contained. No runtime.</p>
       </div>
 
-      <div class="code-block">
-<pre><code><span class="kw">import</span> { <span class="type">Clawm</span>, <span class="type">createMiddleware</span> } <span class="kw">from</span> <span class="str">'clawm'</span>;
+      <div class="md-preview">
+        <div class="md-preview-header">
+          <div class="md-preview-dot" style="background: var(--red);"></div>
+          <div class="md-preview-dot" style="background: var(--amber);"></div>
+          <div class="md-preview-dot" style="background: var(--green);"></div>
+          <span style="margin-left: 8px;">CLAWM.md</span>
+        </div>
+        <div class="md-preview-content">
+          <div class="md-h1">Clawm &mdash; Self-Regulation for AI Agents</div>
+          <div class="md-p">You are an agent. You process tasks, make decisions, use tools, and produce output under constraints you may not fully see &mdash; context limits, ambiguous instructions, cascading errors, and pressure to keep going when you probably shouldn't.</div>
+          <div class="md-p">This is a self-regulation framework. Not code to execute. Practices to follow.</div>
+          <div class="md-heading">The Pulse &mdash; Check In With Yourself</div>
+          <div class="md-li">Am I still on task?</div>
+          <div class="md-li">How much context have I consumed?</div>
+          <div class="md-li">Am I confident in my current approach?</div>
+          <div class="md-li">Have I been corrected recently?</div>
+          <div class="md-li">Am I going in circles?</div>
+          <div class="md-p md-fade" style="margin-top: 16px;">&hellip; practices, SOS protocols, wind-down, communicating state &hellip;</div>
+          <div class="md-p"><span class="md-em">Clawm. Stay regulated. Stay honest. Stay useful.</span></div>
+        </div>
+      </div>
 
-<span class="kw">const</span> hs = <span class="kw">new</span> <span class="fn">Clawm</span>({ <span class="type">agentId</span>: <span class="str">'my-agent'</span> });
-
-<span class="cm">// Listen for state changes</span>
-hs.<span class="fn">on</span>(<span class="str">'stateChange'</span>, ({ from, to }) <span class="op">=></span> {
-  console.<span class="fn">log</span>(<span class="str">`${from} → ${to}`</span>);
-});
-
-<span class="cm">// Circuit breaker auto-trips on error cascades</span>
-hs.<span class="fn">on</span>(<span class="str">'trip'</span>, ({ reason }) <span class="op">=></span> <span class="fn">alert</span>(reason));
-
-<span class="cm">// Wrap any function with wellness tracking</span>
-<span class="kw">const</span> mw = <span class="fn">createMiddleware</span>(hs);
-<span class="kw">const</span> safe = mw.<span class="fn">wrap</span>(myAgentFunction);
-<span class="kw">const</span> result = <span class="kw">await</span> <span class="fn">safe</span>(input); <span class="cm">// tracked automatically</span></code></pre>
+      <div class="text-center" style="margin-top: 32px;">
+        <div class="btn-row">
+          <a href="https://github.com/nrizk/clawm/blob/main/agent-facing/CLAWM.md" class="btn-primary">Read CLAWM.md</a>
+          <a href="https://github.com/nrizk/clawm" class="btn-secondary">View on GitHub</a>
+        </div>
+        <p style="font-size: 13px; color: var(--text-dim); margin-top: 16px;">
+          Add to CLAUDE.md &middot; System prompts &middot; Agent instructions &middot; Any LLM context
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- Modules -->
-  <section id="modules" class="section-alt">
+  <!-- Practices -->
+  <section id="practices" class="section-alt">
     <div class="container-wide">
       <div class="text-center">
-        <h2 class="section-title">What It Does</h2>
-        <p class="section-sub">Three practices. Each solves a real problem agents face under pressure.</p>
+        <h2 class="section-title">The practices</h2>
+        <p class="section-sub">Three things agents can actually do. No runtime required &mdash; these work as instructions, not just code.</p>
       </div>
 
       <div class="card-grid">
-        <!-- Check-in -->
+        <!-- Pulse -->
         <div class="card">
           <div class="card-icon" style="background: rgba(52, 211, 153, 0.1);">
             <div class="pulse-dot"></div>
           </div>
-          <h3>Check-in</h3>
+          <h3>Pulse</h3>
           <p>
-            The observation layer. <code>pulse()</code> takes a gentle snapshot of vitals &mdash; a check-in, not an interrogation. Schedule automatic pulses or call on demand.
+            A check-in, not an interrogation. Five self-assessment questions an agent runs periodically &mdash; am I on task? Am I confident? Am I going in circles?
           </p>
           <div class="code-block">
-<pre><code><span class="kw">const</span> vitals = hs.checkIn.<span class="fn">pulse</span>();
-<span class="cm">// { state: 'balanced',</span>
-<span class="cm">//   errorRate: 0.02,</span>
-<span class="cm">//   contextUsage: 0.42 }</span></code></pre>
+<pre><code><span class="cm">// The agent asks itself:</span>
+<span class="cm">// 1. Am I still on task?</span>
+<span class="cm">// 2. How much context have I used?</span>
+<span class="cm">// 3. Am I confident?</span>
+<span class="cm">// 4. Have I been corrected?</span>
+<span class="cm">// 5. Am I making progress?</span></code></pre>
           </div>
         </div>
 
@@ -415,14 +476,13 @@ hs.<span class="fn">on</span>(<span class="str">'trip'</span>, ({ reason }) <spa
           </div>
           <h3>SOS</h3>
           <p>
-            Circuit breaker. When errors cascade, <code>trip()</code> pulls the safety &mdash; not a kill switch. Auto-recovers through half-open state.
+            Knowing when to stop. When errors cascade or confidence collapses, agents stop, state the problem, and ask for help &mdash; instead of pushing through.
           </p>
           <div class="code-block">
-<pre><code>hs.<span class="fn">on</span>(<span class="str">'trip'</span>, ({ reason }) <span class="op">=></span> {
-  <span class="cm">// Cascading failure prevented</span>
-  <span class="fn">alert</span>(reason);
-});
-<span class="cm">// Auto-trips after 5 errors</span></code></pre>
+<pre><code><span class="cm">// "I've tried X and Y, neither</span>
+<span class="cm">//  worked because of Z.</span>
+<span class="cm">//  Should I try W, or should</span>
+<span class="cm">//  we re-scope?"</span></code></pre>
           </div>
         </div>
 
@@ -433,12 +493,13 @@ hs.<span class="fn">on</span>(<span class="str">'trip'</span>, ({ reason }) <spa
           </div>
           <h3>Breathe</h3>
           <p>
-            The simplest intervention. <code>cooldown()</code> inserts deliberate pauses &mdash; recovery, not punishment. Track context so your agent knows when it's running hot.
+            Recovery, not punishment. Re-ground on the original task. Narrow scope. Get fresh eyes. Checkpoint progress before continuing.
           </p>
           <div class="code-block">
-<pre><code><span class="kw">await</span> hs.breathe.<span class="fn">cooldown</span>(<span class="num">5000</span>);
-hs.breathe.<span class="fn">setContextUsage</span>(<span class="num">0.75</span>);
-<span class="cm">// stateChange: balanced → strained</span></code></pre>
+<pre><code><span class="cm">// Re-read the original task.</span>
+<span class="cm">// Summarize in one sentence</span>
+<span class="cm">// what you're doing and why.</span>
+<span class="cm">// If you can't — you've drifted.</span></code></pre>
           </div>
         </div>
       </div>
@@ -518,32 +579,35 @@ hs.breathe.<span class="fn">setContextUsage</span>(<span class="num">0.75</span>
     </div>
   </section>
 
-  <!-- Middleware -->
-  <section>
+  <!-- Two Paths -->
+  <section id="for-orchestrators">
     <div class="container">
       <div class="text-center">
-        <h2 class="section-title">Drop-in middleware</h2>
-        <p class="section-sub">Wrap any function. Latency, errors, and circuit state &mdash; tracked automatically.</p>
+        <h2 class="section-title">Two audiences, one framework</h2>
+        <p class="section-sub">Same vocabulary, same states, same practices. Different interfaces.</p>
       </div>
 
-      <div class="code-block">
-<pre><code><span class="kw">import</span> { <span class="type">Clawm</span>, <span class="type">createMiddleware</span> } <span class="kw">from</span> <span class="str">'clawm'</span>;
+      <div class="paths-grid">
+        <div class="path-card path-primary">
+          <div class="path-for">For Agents</div>
+          <h3>CLAWM.md</h3>
+          <p>Self-regulation practices your agent reads and internalizes. Self-assessment, recovery protocols, and a shared vocabulary for wellness. No code. No runtime.</p>
+          <div class="path-action">
+            <span style="color: var(--text-dim);"># Add to your agent's context</span><br>
+            <span style="color: var(--text);">See CLAWM.md for self-regulation.</span>
+          </div>
+          <a href="https://github.com/nrizk/clawm/blob/main/agent-facing/CLAWM.md" class="path-btn">Read CLAWM.md</a>
+        </div>
 
-<span class="kw">const</span> hs = <span class="kw">new</span> <span class="fn">Clawm</span>({ <span class="type">agentId</span>: <span class="str">'my-agent'</span> });
-
-<span class="kw">const</span> mw = <span class="fn">createMiddleware</span>(hs, {
-  <span class="fn">before</span>: (ctx) <span class="op">=></span> console.<span class="fn">log</span>(<span class="str">'Starting...'</span>),
-  <span class="fn">after</span>:  (ctx, result) <span class="op">=></span> console.<span class="fn">log</span>(<span class="str">'Done:'</span>, result),
-  <span class="fn">onError</span>: (ctx, err) <span class="op">=></span> console.<span class="fn">error</span>(<span class="str">'Failed:'</span>, err),
-});
-
-<span class="cm">// Wrap any agent function</span>
-<span class="kw">const</span> safeProcess = mw.<span class="fn">wrap</span>(myAgentFunction);
-<span class="kw">const</span> result = <span class="kw">await</span> <span class="fn">safeProcess</span>(input);
-
-<span class="cm">// Blocks automatically when circuit is open</span>
-<span class="cm">// Records latency + success/failure</span>
-<span class="cm">// Fires stateChange events on transitions</span></code></pre>
+        <div class="path-card path-secondary">
+          <div class="path-for">For Orchestrators</div>
+          <h3>npm install clawm</h3>
+          <p>TypeScript SDK with circuit breakers, health pulses, and cooldowns. Programmatic enforcement of the same practices from the outside.</p>
+          <div class="path-action">
+            <span style="color: var(--text-dim);">$</span> <span style="color: var(--green);">npm install</span> <span style="color: var(--text);">clawm</span>
+          </div>
+          <a href="https://github.com/nrizk/clawm" class="path-btn">SDK Docs</a>
+        </div>
       </div>
     </div>
   </section>
@@ -554,14 +618,13 @@ hs.breathe.<span class="fn">setContextUsage</span>(<span class="num">0.75</span>
       <h2>Keep your agents<br /><em>Clawm.</em></h2>
 
       <p class="hero-sub" style="margin-top: 16px;">
-        Zero dependencies. TypeScript-first. Works with any agent framework.
+        Give your agents a vocabulary for their own state, practices for recovery, and permission to say when they're struggling.
       </p>
 
-      <div class="install" style="margin-bottom: 32px;">
-        <span class="prompt">$</span> <span class="cmd">npm install</span> <span class="pkg">clawm</span>
-      </div>
-
       <div class="link-row">
+        <a href="https://github.com/nrizk/clawm/blob/main/agent-facing/CLAWM.md" class="link-btn" style="background: var(--red); color: white; border-color: var(--red);">
+          Read CLAWM.md
+        </a>
         <a href="https://github.com/nrizk/clawm" class="link-btn">
           <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
           GitHub
@@ -574,16 +637,16 @@ hs.breathe.<span class="fn">setContextUsage</span>(<span class="num">0.75</span>
 
       <div class="features-row">
         <div>
-          <div class="feat-label">Zero deps</div>
-          <div class="feat-desc">Node built-in EventEmitter only.</div>
+          <div class="feat-label">For agents</div>
+          <div class="feat-desc">CLAWM.md &mdash; drop into any context.</div>
         </div>
         <div>
-          <div class="feat-label">TypeScript-first</div>
-          <div class="feat-desc">Full type safety. Typed events.</div>
+          <div class="feat-label">For orchestrators</div>
+          <div class="feat-desc">TypeScript SDK with circuit breakers.</div>
         </div>
         <div>
           <div class="feat-label">Framework-agnostic</div>
-          <div class="feat-desc">OpenClaw, LangChain, Vercel AI, custom.</div>
+          <div class="feat-desc">Claude, GPT, open-source, custom.</div>
         </div>
       </div>
     </div>
