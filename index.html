@@ -55,9 +55,9 @@
     }
     .nav-inner {
       max-width: 960px; margin: 0 auto; padding: 0 24px;
-      height: 56px; display: flex; align-items: center; justify-content: space-between;
+      height: 56px; display: flex; align-items: center; justify-content: center;
     }
-    .nav-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; }
+    .nav-brand { display: none; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; }
     .nav-logo { width: 28px; height: 28px; border-radius: 6px; display: none; }
     @media (max-width: 768px) { .nav-logo { display: block; } }
     .hero-mascot { width: 200px; height: 200px; margin: 0 auto 8px; }
@@ -65,11 +65,51 @@
     .nav-links { display: flex; align-items: center; gap: 24px; font-size: 14px; }
     .nav-links a { color: var(--text-muted); transition: color 0.2s; }
     .nav-links a:hover { color: var(--white); }
-    .nav-links a.nav-btn {
-      background: var(--red); color: white; padding: 6px 16px; border-radius: 6px;
-      font-size: 13px; font-weight: 600; transition: background 0.2s;
+
+    /* ── Hamburger button ──────────────────────────────────────── */
+    .nav-toggle {
+      display: none; background: none; border: none; cursor: pointer;
+      width: 32px; height: 32px; position: relative; z-index: 60;
     }
-    .nav-btn:hover { background: var(--red-dark); }
+    .nav-toggle span {
+      display: block; width: 20px; height: 2px; background: var(--text);
+      border-radius: 2px; position: absolute; left: 6px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .nav-toggle span:nth-child(1) { top: 9px; }
+    .nav-toggle span:nth-child(2) { top: 15px; }
+    .nav-toggle span:nth-child(3) { top: 21px; }
+    .nav-toggle.open span:nth-child(1) { top: 15px; transform: rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { top: 15px; transform: rotate(-45deg); }
+
+    /* ── Mobile nav overlay ────────────────────────────────────── */
+    .nav-overlay {
+      display: none; position: fixed; inset: 0; z-index: 45;
+      background: rgba(0, 0, 0, 0.5); opacity: 0; transition: opacity 0.3s;
+    }
+    .nav-overlay.open { opacity: 1; }
+
+    @media (max-width: 640px) {
+      .nav-inner { justify-content: space-between; }
+      .nav-brand { display: flex; }
+      .nav-toggle { display: block; }
+      .nav-links {
+        position: fixed; top: 0; right: 0; z-index: 55;
+        width: min(280px, 80vw); height: 100vh;
+        flex-direction: column; align-items: stretch; gap: 0;
+        background: var(--bg-surface); border-left: 1px solid var(--border-subtle);
+        padding: 72px 24px 32px;
+        transform: translateX(100%); transition: transform 0.3s ease;
+      }
+      .nav-links.open { transform: translateX(0); }
+      .nav-links a {
+        font-size: 16px; padding: 14px 0;
+        border-bottom: 1px solid var(--border-subtle);
+      }
+      .nav-overlay { display: block; pointer-events: none; }
+      .nav-overlay.open { pointer-events: auto; }
+    }
 
     /* ── Hero ──────────────────────────────────────────────────── */
     .hero {
@@ -125,6 +165,11 @@
 
     /* ── Buttons ───────────────────────────────────────────────── */
     .btn-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    @media (max-width: 640px) {
+      .btn-row { flex-direction: column; align-items: center; }
+      .btn-row .btn-primary,
+      .btn-row .btn-secondary { width: 100%; max-width: 280px; text-align: center; }
+    }
     .btn-primary {
       background: var(--red); color: white; padding: 10px 28px; border-radius: 8px;
       font-weight: 600; font-size: 15px; transition: background 0.2s; border: none; cursor: pointer;
@@ -349,14 +394,17 @@
   <nav>
     <div class="nav-inner">
       <div class="nav-brand"><img src="clawm.png" alt="Clawm" class="nav-logo" /></div>
-      <div class="nav-links">
+      <div class="nav-links" id="navLinks">
         <a href="#for-agents">For Agents</a>
         <a href="#why">Why</a>
         <a href="#for-orchestrators">SDK</a>
         <a href="https://github.com/nrizk/clawm">GitHub</a>
-        <a href="#start" class="nav-btn">Get Started</a>
       </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+    <div class="nav-overlay" id="navOverlay"></div>
   </nav>
 
   <!-- Hero -->
@@ -667,5 +715,25 @@
     </div>
   </footer>
 
+  <script>
+    const toggle = document.getElementById('navToggle');
+    const links = document.getElementById('navLinks');
+    const overlay = document.getElementById('navOverlay');
+
+    function closeMenu() {
+      toggle.classList.remove('open');
+      links.classList.remove('open');
+      overlay.classList.remove('open');
+    }
+
+    toggle.addEventListener('click', () => {
+      const open = toggle.classList.toggle('open');
+      links.classList.toggle('open', open);
+      overlay.classList.toggle('open', open);
+    });
+
+    overlay.addEventListener('click', closeMenu);
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  </script>
 </body>
 </html>
