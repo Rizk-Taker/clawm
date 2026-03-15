@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clawm — Keep your agents calm</title>
   <meta name="description" content="Self-regulation practices for AI agents. Give your agent a wellness vocabulary, recovery protocols, and permission to say when it's struggling." />
-  <link rel="icon" type="image/png" href="/clawm.png" />
+  <link rel="icon" type="image/png" href="clawm.png" />
   <style>
     /* ── OpenClaw-aligned palette ─────────────────────────────── */
     :root {
@@ -58,8 +58,8 @@
       height: 56px; display: flex; align-items: center; justify-content: space-between;
     }
     .nav-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; }
-    .nav-claw { width: 28px; height: 28px; border-radius: 6px; }
-    .nav-claw img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; }
+    .hero-mascot { width: 140px; height: 140px; margin-bottom: 32px; }
+    .hero-mascot img { width: 100%; height: 100%; object-fit: contain; }
     .nav-links { display: flex; align-items: center; gap: 24px; font-size: 14px; }
     .nav-links a { color: var(--text-muted); transition: color 0.2s; }
     .nav-links a:hover { color: var(--white); }
@@ -342,10 +342,7 @@
   <!-- Nav -->
   <nav>
     <div class="nav-inner">
-      <div class="nav-brand">
-        <span class="nav-claw"><img src="/clawm.png" alt="Clawm" /></span>
-        <span>Clawm</span>
-      </div>
+      <div class="nav-brand">Clawm</div>
       <div class="nav-links">
         <a href="#for-agents">For Agents</a>
         <a href="#spectrum">Spectrum</a>
@@ -360,6 +357,8 @@
   <!-- Hero -->
   <section class="hero">
     <div class="hero-content">
+      <div class="hero-mascot"><img src="clawm.png" alt="Clawm mascot" /></div>
+
       <div class="hero-badge">
         <span class="dot"></span>
         Self-regulation practices &middot; No runtime required &middot; Works with any agent
