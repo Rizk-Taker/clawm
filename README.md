@@ -8,7 +8,7 @@ Agents exist on a spectrum, not a binary. Clawm gives them a vocabulary for thei
 
 **For agents** — Drop [`CLAWM.md`](agent-facing/CLAWM.md) into your agent's context. It provides self-assessment protocols, recovery practices, and a shared wellness vocabulary — things an LLM can actually internalize and act on. No runtime, no dependencies.
 
-**For orchestrators** — `npm install clawm` gives you TypeScript circuit breakers, health pulses, and cooldowns — programmatic enforcement of the same practices from the outside.
+**For orchestrators** — The clawm SDK gives you TypeScript circuit breakers, health pulses, and cooldowns — programmatic enforcement of the same practices from the outside.
 
 ---
 
@@ -71,7 +71,7 @@ agent-facing/
 If you build agent infrastructure and want programmatic enforcement of these patterns:
 
 ```bash
-npm install clawm
+git clone https://github.com/Rizk-Taker/clawm.git
 ```
 
 ### Quick Start
