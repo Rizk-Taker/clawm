@@ -1,32 +1,68 @@
-import { EventEmitter } from 'node:events';
 import type { ClawmEvents, ClawmEventName } from './types.js';
 
 type Listener<T> = (data: T) => void;
 
+/**
+ * Browser-native event emitter — replaces node:events dependency.
+ * Supports on, once, off, emit, removeAllListeners.
+ * Error isolation: listener exceptions are caught and logged,
+ * never crash other listeners or the emitter itself.
+ */
 export class ClawmEmitter {
-  private emitter = new EventEmitter();
+  private listeners = new Map<string, Set<Listener<unknown>>>();
+  private onceWrapped = new WeakMap<Listener<unknown>, Listener<unknown>>();
 
   on<K extends ClawmEventName>(event: K, listener: Listener<ClawmEvents[K]>): this {
-    this.emitter.on(event, listener);
+    if (!this.listeners.has(event)) {
+      this.listeners.set(event, new Set());
+    }
+    this.listeners.get(event)!.add(listener as Listener<unknown>);
     return this;
   }
 
   once<K extends ClawmEventName>(event: K, listener: Listener<ClawmEvents[K]>): this {
-    this.emitter.once(event, listener);
+    const wrapped: Listener<ClawmEvents[K]> = (data) => {
+      this.off(event, wrapped);
+      listener(data);
+    };
+    this.onceWrapped.set(listener as Listener<unknown>, wrapped as Listener<unknown>);
+    this.on(event, wrapped);
     return this;
   }
 
   off<K extends ClawmEventName>(event: K, listener: Listener<ClawmEvents[K]>): this {
-    this.emitter.off(event, listener);
+    const set = this.listeners.get(event);
+    if (!set) return this;
+    // Try removing the listener directly
+    if (set.delete(listener as Listener<unknown>)) return this;
+    // If it was registered via once(), remove the wrapper
+    const wrapped = this.onceWrapped.get(listener as Listener<unknown>);
+    if (wrapped) {
+      set.delete(wrapped);
+      this.onceWrapped.delete(listener as Listener<unknown>);
+    }
     return this;
   }
 
   emit<K extends ClawmEventName>(event: K, data: ClawmEvents[K]): boolean {
-    return this.emitter.emit(event, data);
+    const set = this.listeners.get(event);
+    if (!set || set.size === 0) return false;
+    for (const listener of [...set]) {
+      try {
+        (listener as Listener<ClawmEvents[K]>)(data);
+      } catch (err) {
+        console.error(`[ClawmEmitter] Error in "${event}" listener:`, err);
+      }
+    }
+    return true;
   }
 
   removeAllListeners(event?: ClawmEventName): this {
-    this.emitter.removeAllListeners(event);
+    if (event) {
+      this.listeners.delete(event);
+    } else {
+      this.listeners.clear();
+    }
     return this;
   }
 }
