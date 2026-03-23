@@ -27,6 +27,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
+    "build:demo": "esbuild demo/lib/main.ts --bundle --format=esm --platform=browser --outfile=demo/experiment.js --sourcemap",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
@@ -42,6 +43,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^20.11.0",
+    "esbuild": "^0.27.4",
     "typescript": "^5.3.0",
     "vitest": "^1.2.0"
   },
